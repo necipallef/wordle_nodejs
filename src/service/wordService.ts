@@ -13,7 +13,7 @@ export function getWordByDate(date: Date): string {
 
 export function isWordExist(word: string): boolean {
   const firstLetter = word.substring(0, 1)
-  const fileName = firstLetter === 'ı' ? 'i1' : firstLetter
+  const fileName = firstLetter === 'ı' ? 'i1' : firstLetter.toLocaleLowerCase('tr')
   const words = fs.readFileSync(`${assetsDirectoryPath}/dictionary/${fileName}.txt`).toString().split('\n')
   return words.some((w) => w.toLocaleLowerCase('tr') === word.toLocaleLowerCase('tr'))
 }
