@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 
-const wordFilePath = `${__dirname}/../../assets/words_tr.txt`
+const assetsDirectoryPath = `${__dirname}/../../assets`
+const wordFilePath = `${assetsDirectoryPath}/words_tr.txt`
 
 export function getWordByDate(date: Date): string {
   const words = fs.readFileSync(wordFilePath).toString().split('\n')
@@ -11,6 +12,8 @@ export function getWordByDate(date: Date): string {
 }
 
 export function isWordExist(word: string): boolean {
-  const words = fs.readFileSync(wordFilePath).toString().split('\n')
-  return words.some((w) => w.toLowerCase() === word.toLowerCase())
+  const firstLetter = word.substring(0, 1)
+  const fileName = firstLetter === 'ı' ? 'i1' : firstLetter
+  const words = fs.readFileSync(`${assetsDirectoryPath}/dictionary/${fileName}.txt`).toString().split('\n')
+  return words.some((w) => w.toLocaleLowerCase('tr') === word.toLocaleLowerCase('tr'))
 }
