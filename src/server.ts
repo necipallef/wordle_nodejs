@@ -19,3 +19,11 @@ server.get('/check-word', (req, res) => {
   const exists = isWordExist(word)
   res.send({ exists })
 })
+
+server.post('/session', (req, res) => {
+    if (req.body.username === 'sueda' && req.body.password === '123456') {
+        res.send('ok')
+    } else {
+        res.status(401).end()
+    }
+})
